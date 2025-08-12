@@ -28,10 +28,55 @@ export const ORGANIZATION_POST_LIST = gql`
           node {
             id
             caption
+            commentsCount
+            pinnedAt
+            downVotesCount
+            upVoters(first: 10) {
+              # any number based on how many upvoters you want to fetch
+              edges {
+                node {
+                  id
+                  creator {
+                    id
+                    name
+                  }
+                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+                hasPreviousPage
+              }
+            }
+            upVotesCount
             creator {
               id
+              name
             }
             createdAt
+
+            comments(first: 10) {
+              # fetch comments
+              edges {
+                node {
+                  id
+                  body
+                  creator {
+                    id
+                    name
+                  }
+                  downVotesCount
+                  upVotesCount
+                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+                hasPreviousPage
+              }
+            }
           }
           cursor
         }
