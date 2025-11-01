@@ -99,22 +99,54 @@ const PostsRenderer: React.FC<InterfacePostsRenderer> = ({
 
   const renderPostCard = (post: InterfacePost): JSX.Element | null => {
     if (!post || !post.id) return null;
+
     const createdAt = new Date(post.createdAt);
     const attachments = createAttachments(post, createdAt);
+    const [expanded, setExpanded] = useState(false);
+
+    const caption = post.caption || '';
+    const maxLength = 150;
+    const isLong = caption.length > maxLength;
+    const displayText = expanded
+      ? caption
+      : caption.slice(0, maxLength) + (isLong ? '...' : '');
 
     return (
-      <div data-testid="postCardContainer" key={post.id}>
+      <div
+        data-testid="postCardContainer"
+        key={post.id}
+        style={{ marginBottom: '16px' }}
+      >
+        {/* Post card */}
         <OrgPostCard
           key={post.id}
           post={{
             id: post.id,
-            caption: post.caption || null,
+            caption: displayText,
             createdAt,
             pinnedAt: post.pinnedAt ? new Date(post.pinnedAt) : null,
             creatorId: post.creator?.id || null,
             attachments,
           }}
         />
+
+        {/* View more / less button */}
+        {isLong && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#007bff',
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              padding: 0,
+              marginTop: '4px',
+            }}
+          >
+            {expanded ? 'View less' : 'View more'}
+          </button>
+        )}
       </div>
     );
   };
