@@ -1303,6 +1303,56 @@ export const GET_USER_TAGS = gql`
   }
 `;
 
+export const GET_EVENTS_BY_ORGANIZATION_ID = gql`
+  query GetEventsByOrganizationId($organizationId: ID!) {
+    eventsByOrganizationId(
+      input: { organizationId: $organizationId }
+    ) {
+      id
+      name
+      description
+      startAt
+      endAt
+      allDay
+      location
+      isPublic
+      isRegisterable
+      createdAt
+      updatedAt
+      attendees {
+        id
+        name
+      }
+      creator {
+        id
+        name
+      eventsAttended {
+        id
+      }
+      }
+
+      organization {
+        id
+        name
+      }
+    }
+  }
+`;
+
+export const USERS_REGISTERED_FOR_EVENT = gql`
+query EventDetails($id: String!) {
+  event(input: { id: $id }) {
+    id
+    name
+    creator {
+      id
+      name
+      emailAddress
+    }
+  }
+}
+}`;
+
 // get the list of Action Item Categories
 export { ACTION_ITEM_CATEGORY_LIST } from './ActionItemCategoryQueries';
 

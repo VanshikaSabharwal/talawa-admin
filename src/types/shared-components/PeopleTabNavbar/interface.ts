@@ -19,6 +19,11 @@ export interface InterfacePeopleTabNavbarProps {
     testIdPrefix: string;
     icon?: string | null;
   }>;
+    participationFilter?: {
+    selected: 'ALL' | 'REGISTERED' | 'ADMIN_CREATOR';
+    onChange: (value: 'ALL' | 'REGISTERED' | 'ADMIN_CREATOR') => void;
+  };
+
   showEventTypeFilter?: boolean;
   actions?: ReactNode;
 }

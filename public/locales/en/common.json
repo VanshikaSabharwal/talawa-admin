@@ -303,5 +303,8 @@
   "searchPlaceholder": "Search...",
   "noOptionsFound": "No options found",
   "noUserId": "User ID not available",
-  "noTagsFound": "No tags found"
+  "noTagsFound": "No tags found",
+  "participation": "Participation",
+  "registeredForEvents": "Registered for events",
+  "eventAdminOrCreator": "Admin / Creator"
 }

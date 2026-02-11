@@ -39,11 +39,11 @@ import { useTranslation } from 'react-i18next';
 import PeopleTabNavbar from 'shared-components/PeopleTabNavbar/PeopleTabNavbar';
 import { GET_USER_TAGS } from 'GraphQl/Queries/Queries';
 import { useQuery } from '@apollo/client';
-import { InterfaceUserTagsProps } from 'types/AdminPortal/UserDetails/UserOrganization/UserEvent/type';
+import { InterfaceUserTagsProps } from 'types/AdminPortal/UserDetails/UserTags/type';
 import {
   InterfaceUserTag,
   InterfaceGetUserTagsData,
-} from 'types/AdminPortal/UserDetails/UserOrganization/UserEvent/interface';
+} from 'types/AdminPortal/UserDetails/UserTags/interface';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
@@ -72,6 +72,7 @@ const UserTags = ({ id }: InterfaceUserTagsProps) => {
       createdOn: formatDate(tag.createdAt),
       createdBy: tag.creator?.name,
     })) ?? [];
+    
   const sortTags = (tags: InterfaceUserTag[]) => {
     const sorted = [...tags];
 
